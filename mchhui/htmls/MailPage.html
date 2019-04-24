@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+<meta charset="utf-8">
+<title>邮箱 - Hueihuea's Blog</title>
+	<script type="text/javascript">
+	function mailImgOnclick(id){
+	var obj=document.getElementById(id);
+	obj.style.visibility ="visible";
+	obj.select();
+	document.execCommand("Copy");
+	obj.style.visibility ="hidden";
+		if(confirm("已复制 关闭？")){
+		window.close();
+		}
+	}
+	</script>
+</head>
+<style>
+body 
+{
+	background-image:url('/mchhui/assets/img/bg.png'),url('/mchhui/assets/img/bgbase.png');
+	background-repeat:no-repeat,repeat;
+	background-position: center top,center center;
+	background-size:cover,auto;
+}
+</style>
+<body>
+	<div style="text-align:center">
+	<hr>
+	<img src="/mchhui/assets/img/mailpage.png" alt="图片加载失败" onclick="javascript:mailImgOnclick('mailAddress');">
+	</div>
+	 <input style="visibility: hidden;" id="mailAddress" type="text" value="mchhui@foxmail.com">
+</body>
+</html>
