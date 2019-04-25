@@ -3,19 +3,37 @@
 <head><meta name="generator" content="Hexo 3.8.0">
 <meta charset="utf-8">
 <title>404页面</title>
+	<script type="text/javascript">
+	function talk(id){
+	var name=prompt("你叫什么？","小明");
+		if(name!=null){
+		alert("好的"+name+"你点我干嘛？\n点上面啊！");
+		}
+	}
+	</script>
 </head>
+
 <style>
-body 
-{
-	background-image:url('/mchhui/assets/img/404.png'),url('/mchhui/assets/img/bgbase.png');
-	background-repeat:no-repeat,repeat;
-	background-position: center top,center center;
-	background-size:cover,auto;
+div.textpos {
+  position:absolute;
+  left:50%;
+  top:5%;
+  margin-left: -205px;
+}
+div.imgpos {
+  position:absolute;
+  left:50%;
+  top:25%;
+  margin-left: -283px;
 }
 </style>
-<body>
-	<div style="text-align:center">
+
+<body bgcolor="#000000">
+	<div class="textpos">
 	<img src="/mchhui/assets/img/404text.png" alt="图片加载失败" onclick="javascript:location.href='/';">
 	</div>
-</body>
+	<div class="imgpos">
+	<img src="/mchhui/assets/img/404.png" alt="图片加载失败" onclick="javascript:talk()">
+</div></body>
+
 </html> 
