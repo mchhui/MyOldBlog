@@ -1,5 +1,4 @@
 $(document).ready(function() {
-	window.alert('有加载哦！');
 	$(".highlight").append('<a class="btn-copy" href onClick="CopyCode($(this));return false;">复制代码</a>');
 });
 
