@@ -1,3 +1,7 @@
+new_element = document.createElement("script");
+new_element.setAttribute("type","text/javascript");
+new_element.setAttribute("src", "/js/popup.js");
+document.body.appendChild(new_element);
 $(document).ready(function() {
 	$(".highlight").append('<a class="btn-copy" href onClick="CopyCode($(this));return false;">复制代码</a>');
 });
@@ -16,11 +20,9 @@ function CopyCode(e){
 		window.getSelection().addRange(range);
 		document.execCommand('copy');
 		window.getSelection().removeAllRanges();
-		$(".nav-tip")[0].innerText = '复制成功';
+		popup('复制成功',-1);
 		cp.parentElement.removeChild(cp);
 	} catch (e) {
-		$(".nav-tip")[0].innerText = '复制失败';
+		popup('复制失败',-1);
 	}
-	$(".nav-tip").fadeTo(0,1);
-	setTimeout(function(){$(".nav-tip").animate({opacity: 0},1000)},3000);
 }
