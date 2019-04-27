@@ -25,4 +25,5 @@ function CopyCode(e){
 	} catch (e) {
 		popup('复制失败',-1);
 	}
+	msgTip("鸭鸭,CV小哥！");
 }
