@@ -13,6 +13,7 @@ var lock=true;
 var TipTimer=150;
 var Tiplv=true;
 var isInLive2d=false;
+var oldonload = window.onload
 window.onload=(function() {
 	$('#live2dcanvas')[0].style.opacity="0.5";
 	$('#live2dcanvas')[0].style.marginTop="130px";
@@ -28,6 +29,8 @@ window.onload=(function() {
 			isInLive2d=true;
 		}
 	}) 
+    oldonload();
+    return false;
 })
 
 function hide(){
