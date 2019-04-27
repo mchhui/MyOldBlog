@@ -19,6 +19,16 @@ window.onload=(function() {
 	$('#live2dcanvas')[0].style.marginTop="130px";
 	$("body").append('<div id="l2dTipBar" style="position: fixed; right: 50px; bottom: 160px; width: 200px;  z-index: 100000; opacity: 1; background: rgb(245,245,245); border: 2px solid #777; border-radius: 20px;opacity:0;text-align:center;padding:10px 5px 10px 5px;pointer-events:none;"><font id="l2dTip" color="#222" size="2"></font></div>');
 	setInterval(checkTip,20);
+    touch.on($("body"),"doubletap",function(e){                
+		if(isShow){
+			msgTip("好吧好吧qwq 不烦你了XD");
+			hide();
+		}else{
+			msgTip("我来咯！");
+			show();
+			isInLive2d=true;
+		}
+	}) 
 })
 
 function hide(){
@@ -73,6 +83,7 @@ document.onclick=function(ev){                
 
 
 }
+
 
 $(document).mousemove(function(ev){
 	var e=ev;
