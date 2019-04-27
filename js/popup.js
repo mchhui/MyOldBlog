@@ -25,7 +25,7 @@ popupText.style.fontSize='30px';
 popupText.style.fontFamily='Microsoft JhengHei';
 popupText.style.color="black";
 popupBG.src='/mchhui/assets/img/popup_bg.png';
-popupBG.width=''+(width+parseInt(((text.length-getLength(text)/2)*30)));
+popupBG.width=''+(60+parseInt(((text.length-getLength(text)/2)*30)));
 popupBG.height=''+height;
 
 popupBG.style.position='absolute';
