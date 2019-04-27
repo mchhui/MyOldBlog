@@ -16,7 +16,7 @@ var isInLive2d=false;
 
 window.onload=(function() {
 	$('#live2dcanvas')[0].style.opacity="0.5";
-	$('#live2dcanvas')[0].style.marginTop="120px";
+	$('#live2dcanvas')[0].style.marginTop="130px";
 	$("body").append('<div id="l2dTipBar" style="position: fixed; right: 50px; bottom: 160px; width: 200px;  z-index: 100000; opacity: 1; background: rgb(245,245,245); border: 2px solid #777; border-radius: 20px;opacity:0;text-align:center;padding:10px 5px 10px 5px;pointer-events:none;"><font id="l2dTip" color="#222" size="2"></font></div>');
 	setInterval(checkTip,20);
 })
@@ -32,7 +32,7 @@ lock=false;
 	},5);
 setTimeout(function(){
 	clearInterval(interval)
-	$('#live2dcanvas')[0].style.marginTop="120px";
+	$('#live2dcanvas')[0].style.marginTop="130px";
 	lock=true;
 	},120);
 	isShow=false;
@@ -49,7 +49,7 @@ interval =setInterval(function(){
 	},5);
 setTimeout(function(){
 	clearInterval(interval)
-	$('#live2dcanvas')[0].style.marginTop="70px";
+	$('#live2dcanvas')[0].style.marginTop="80px";
 	lock=true;
 	},120);
 isShow=true;
@@ -62,10 +62,10 @@ document.onclick=function(ev){                
 	var y=oEvent.clientY;
 	//popup(document.body.clientHeight-y,-1);
 
-		if(isShow&&document.body.clientWidth-x>100&&document.body.clientWidth-x<200&&document.body.clientHeight-y<170){
+		if(isShow&&document.body.clientWidth-x>100&&document.body.clientWidth-x<200&&document.body.clientHeight-y<160){
 			msgTip("好吧好吧qwq 不烦你了XD");
 			hide();
-		}else if(document.body.clientWidth-x>100&&document.body.clientWidth-x<200&&document.body.clientHeight-y<100){
+		}else if(document.body.clientWidth-x>100&&document.body.clientWidth-x<200&&document.body.clientHeight-y<90){
 			msgTip("我来咯！");
 			show();
 			isInLive2d=true;
