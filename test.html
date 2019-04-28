@@ -3,14 +3,37 @@
 <head><meta name="generator" content="Hexo 3.8.0">
 <meta charset="utf-8">
 <title>测试页面</title>
-<script type="text/javascript" src="/js/popup.js"></script>
-<script type="text/javascript" src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
-<script type="text/javascript" src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
-<script type="text/javascript" src="/js/cursor.js"></script>
-<head><meta name="generator" content="Hexo 3.8.0">
-</head></head><body>
-<body>
+<div style="position: fixed; right: 350px;bottom: 20px;opacity: 0.8;">
+<div style="width:150px;height:17px;background: rgb(245,245,245); border: 2px solid #777;"><input id="turing_input_box" type="text" placeholder="我想说..." style="width:130px;height:17px;border:0px;background:none;margin-left:10px;outline:none;"></div>
+<button id="send_button" onclick="turing_submit();" background: style="width:75px;height:17px;background:rgb(60,179,113); border: 1px solid #777; border-radius: 5px;">发射</button><button id="clear_button" onclick background: style="width:75px;height:17px;background:rgb(0,191,255); border: 1px solid #777; border-radius: 5px;margin-left:4px;">清空</button>
+</div>
+<textarea id="turing_output_box" readonly="readonly" rows="3"></textarea>
 <script type="text/javascript">
-popup("测试hellookok好的好的");
+var xhr = new XMLHttpRequest;
+function turing_submit() {
+  var url = "http://www.tuling123.com/openapi/api?key=e1230e4385c8a5efdb7ae21a293f9f0c&info=" + document.getElementById("turing_input_box").value;
+  xhr.open("get",url,false);
+  xhr.send(null);
+  if ( (xhr.status >= 200 && xhr.status < 300) || xhr.status == 304 ){
+  message=eval("(" + xhr.responseText + ")").text;
+  message.replace("MyName","灰灰").replace("图灵工程师爸爸","码农灰").replace("图灵工程师爸爸","女装的码农灰");
+  var last="";
+  switch(message[message.length-1]){
+  case "。":
+  last="的说。";
+  break;
+  case "！":
+  last="鸭！";
+  break;
+  case "？":
+  last=",嗯呢?";
+  break;
+  }
+  if(last!=""){
+  message=message.substr(0, message.length - 1);
+  }
+  	document.getElementById("turing_output_box").value = message+last;
+  }
+}
 </script>
-</body><script src="/js/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"","pluginJsPath":"js/","pluginModelPath":"l2d/","tagMode":false,"debug":false,"model":{"jsonPath":"/l2d/minecraft.model.json"},"display":{"position":"right","width":300,"height":300},"mobile":{"show":true},"log":false});</script></body></html> <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+</head></html> <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
