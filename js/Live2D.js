@@ -135,9 +135,9 @@ function talk(str){
 }
 var xhr = new XMLHttpRequest;
 function turing_submit() {
-  var url = "https://www.tuling123.com/openapi/api?key=e1230e4385c8a5efdb7ae21a293f9f0c&info=" + document.getElementById("turing_input_box").value;
+  var url = "http://www.tuling123.com/openapi/api?key=e1230e4385c8a5efdb7ae21a293f9f0c&info=" + document.getElementById("turing_input_box").value;
   xhr.open("get",url,false);
-  xhr.send(null);
+  xhr.get(null);
   if ( (xhr.status >= 200 && xhr.status < 300) || xhr.status == 304 ){
   message=eval("(" + xhr.responseText + ")").text;
   message=message.replace("MyName","灰灰").replace("图灵工程师爸爸","码农灰").replace("图灵工程师爸爸","女装的码农灰");
