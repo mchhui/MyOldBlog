@@ -6,15 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2019/4 | Hueihuea&#39;s Blog</title>
+  <title>1.12.2的NPC抛射物 | Hueihuea&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hueihuea&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/archives/2019/04/index.html">
+  <meta name="description" content="警告本教程可能含有个人理解这会导致错误的引导请三思而后行 众所周知CNPC的NPC是可以发射抛射物的那他抛射物究竟是是什么呢？ noppes.npcs.entity.EntityProjectileEntityProjectile类位于noppes.npcs.entity包下它是noppes为NPCmod实现的一个抛射物实体。我们今天主要了解以下内容:  创建并召唤EntityProjectile">
+<meta name="keywords" content="CNPC,教程,minecraft 1.12.2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="1.12.2的NPC抛射物">
+<meta property="og:url" content="http://yoursite.com/2019/04/30/cnpc/1.12.2-NPC-Projectile/index.html">
 <meta property="og:site_name" content="Hueihuea&#39;s Blog">
+<meta property="og:description" content="警告本教程可能含有个人理解这会导致错误的引导请三思而后行 众所周知CNPC的NPC是可以发射抛射物的那他抛射物究竟是是什么呢？ noppes.npcs.entity.EntityProjectileEntityProjectile类位于noppes.npcs.entity包下它是noppes为NPCmod实现的一个抛射物实体。我们今天主要了解以下内容:  创建并召唤EntityProjectile">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="https://upload.cc/i1/2019/04/30/NlQaUi.png">
+<meta property="og:updated_time" content="2019-04-30T16:31:36.011Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hueihuea&#39;s Blog">
+<meta name="twitter:title" content="1.12.2的NPC抛射物">
+<meta name="twitter:description" content="警告本教程可能含有个人理解这会导致错误的引导请三思而后行 众所周知CNPC的NPC是可以发射抛射物的那他抛射物究竟是是什么呢？ noppes.npcs.entity.EntityProjectileEntityProjectile类位于noppes.npcs.entity包下它是noppes为NPCmod实现的一个抛射物实体。我们今天主要了解以下内容:  创建并召唤EntityProjectile">
+<meta name="twitter:image" content="https://upload.cc/i1/2019/04/30/NlQaUi.png">
   
     <link rel="alternative" href="/atom.xml" title="Hueihuea&#39;s Blog" type="application/atom+xml">
   
@@ -170,36 +177,90 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-cnpc/1.12.2-NPC-Projectile" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/04/30/cnpc/1.12.2-NPC-Projectile/" class="archive-article-date">
-  	<time datetime="2019-04-29T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-30</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/04/30/cnpc/1.12.2-NPC-Projectile/">1.12.2的NPC抛射物</a>
+    <h1 class="article-title" itemprop="name">
+      1.12.2的NPC抛射物
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/04/30/cnpc/1.12.2-NPC-Projectile/" class="archive-article-date">
+  	<time datetime="2019-04-29T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="警告"><a href="#警告" class="headerlink" title="警告"></a>警告</h2><p>本教程可能含有<br>个人理解<br>这会导致错误的引导<br>请三思而后行</p>
+<h3 id="众所周知"><a href="#众所周知" class="headerlink" title="众所周知"></a>众所周知</h3><p>CNPC的NPC是可以发射抛射物的<br>那他抛射物<br>究竟是是什么呢？</p>
+<h4 id="noppes-npcs-entity-EntityProjectile"><a href="#noppes-npcs-entity-EntityProjectile" class="headerlink" title="noppes.npcs.entity.EntityProjectile"></a>noppes.npcs.entity.EntityProjectile</h4><p>EntityProjectile类位于noppes.npcs.entity包下<br>它是noppes为NPCmod实现的一个抛射物实体。<br>我们今天主要了解以下内容:</p>
+<ul>
+<li>创建并召唤EntityProjectile</li>
+<li>修改EntityProjectile对象的属性</li>
+</ul>
+<h4 id="创建一个EntityProjectile对象"><a href="#创建一个EntityProjectile对象" class="headerlink" title="创建一个EntityProjectile对象"></a>创建一个EntityProjectile对象</h4><p>首先我们看EntityProjectile的构建方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">EntityProjectile</span><span class="params">(<span class="keyword">final</span> World world)</span> </span>&#123;</span><br><span class="line">...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>从中我们可以看出</p>
+<blockquote>
+<p>实例化一个<br>EntityProjectile对象需要<br>一个World类型的参数world</p>
+</blockquote>
+<p>那这个world表示什么呢？<br>表示这个实体存在于那个世界。<br>那么这个World类型具体是那个World呢<br>是net.minecraft.world.World<br>那么我们如何在脚本中获取我们想要的World呢？</p>
+<p>我们看NPCAPI的IWorld接口<br>它里面有一个getMCWorld()的方法<br>返回值类型是net.minecraft.world.World<br>他就是帮助我们获取我们想要的World的方法</p>
+<p>举个例子<br>获取当前NPC的所在世界<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> MCWorld=&lt;npc&gt;.getWorld().getMCWorld();</span><br></pre></td></tr></table></figure></p>
+<p>好 现在获取了一个World对象了<br>那么我们接着当然是要实例化EntityProjectile啊<br>我们需要先导入EntityProjectile类<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> EntityProjectile=Java.type(<span class="string">"noppes.npcs.entity.EntityProjectile"</span>);</span><br></pre></td></tr></table></figure></p>
+<p>然后实例化EntityProjectile<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> projectile=<span class="keyword">new</span> EntityProjectile(MCWorld);</span><br></pre></td></tr></table></figure></p>
+<p>然后我更推荐大家把他转型成EntityProjectileWrapper。<br>在转型前。<br>我们先了解<strong>EntityProjectile EntityProjectileWrapper IEntityProjectile</strong>的关系<br>首先 IEntityProjectile 是一个noppes为我们提供的接口<br>而EntityProjectileWrapper是实现了IEntityProjectile的一个Wrapper(封装器)<br>那Wrapper是什么呢。<br>比较浅显的，可以理解为 他把所有方法 属性 都翻译成”人话”，让你可以<strong>很容易看懂</strong>。<br><img src="https://upload.cc/i1/2019/04/30/NlQaUi.png" alt><br>总的来说 EntityProjectileWrapper和IEntityProjectile的用途就是 传递数据 简化操作 隔离底层<br>也就是说 他们是为了让你的操作更简单而存在的<br><del>这个还是只能意会难以言传啊 想深入了解的还是自己百度吧 其实就是一种设计模式noppes的代码确实有点迷)</del></p>
+<p><strong>那么,为什么要把EntityProjectile转成EntityProjectileWrapper呢?</strong><br>因为EntityProjectileWrapper继承了EntityWrapper<br>这意味着什么？这意味你可以使用IEntity的全部方法,简单的进行操作。<br><em>希望你不用问我 转成EntityProjectileWrapper怎么用EntityProjectile的方法。<br>当然是使用getMCEntity()啊！</em></p>
+<p>好的 我们现在把它转型成EntityProjectileWrapper<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> EntityProjectileWrapper=Java.type(<span class="string">"noppes.npcs.api.wrapper.EntityProjectileWrapper"</span>);<span class="comment">//你也可以放在前面与EntityProjectile一起声明并赋值。</span></span><br><span class="line">projectile=<span class="keyword">new</span> EntityProjectileWrapper(projectile);</span><br></pre></td></tr></table></figure></p>
+<p>刚刚转型成EntityProjectileWrapper现在就会显现出来了<br>我们可以这样子召唤抛射物并设置位置<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//注意 本代码会出错 请继续往下看</span></span><br><span class="line">&lt;npc&gt;.getWorld().spawnEntity(projectile);</span><br><span class="line">projectile.setPosition(&lt;npc&gt;.x,&lt;npc&gt;.y+2,&lt;npc&gt;.z);</span><br></pre></td></tr></table></figure></p>
+<p>这样子我们就把他召唤在NPC头上了<br>当然 这是会出错的<br>你们知道为什么吗？<br>因为我们没有trownItem<br>也就是要发射的物品<br>因此我们发还要设置发射物品<br>然后为了其他需求 还需要设置很多。<br>所以<br>我个人推荐 使用EntityProjectileWrapper的另一个构建方法进行构建</p>
+<pre><code class="java"><span class="function"><span class="keyword">public</span> <span class="title">EntityProjectile</span><span class="params">(<span class="keyword">final</span> World world, <span class="keyword">final</span> EntityLivingBase thrower, <span class="keyword">final</span> ItemStack item, <span class="keyword">final</span> <span class="keyword">boolean</span> isNPC)</span> </span>{
+...
+}
+</code></pre>
+<blockquote>
+<p>final World world 存在于那个世界<br>final EntityLivingBase thrower 发射者<br>final ItemStack item 发射物品<br>final boolean isNPC 是不是NPC发射的</p>
+</blockquote>
+<p>那么我们一个完整的生成<br><strong><strong> 未完待续… </strong></strong></p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>我很可爱 请给我钱哒！<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="\mchhui\assets\img\afdian.png">
+                      <span class="reward-type">爱发电</span>
+                    </div>
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -219,57 +280,106 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/04/30/cnpc/1.12.2-NPC-Projectile/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/04/27/usual/BlogSuccessfulConstruction/" class="archive-article-date">
-  	<time datetime="2019-04-26T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-27</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/04/27/usual/BlogSuccessfulConstruction/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">2019.4.27博客大体搭建成功</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/04/27/usual/BlogSuccessfulConstruction/">2019.4.27博客大体搭建成功</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日常</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
+
+  
 
 
           </div>
@@ -293,8 +403,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
