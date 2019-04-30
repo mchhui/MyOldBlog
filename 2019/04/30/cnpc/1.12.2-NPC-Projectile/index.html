@@ -17,7 +17,7 @@
 <meta property="og:description" content="警告本教程可能含有个人理解这会导致错误的引导请三思而后行 众所周知CNPC的NPC是可以发射抛射物的那他抛射物究竟是是什么呢？ noppes.npcs.entity.EntityProjectileEntityProjectile类位于noppes.npcs.entity包下它是noppes为NPCmod实现的一个抛射物实体。我们今天主要了解以下内容:  创建并召唤EntityProjectile">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://upload.cc/i1/2019/04/30/NlQaUi.png">
-<meta property="og:updated_time" content="2019-04-30T16:31:36.011Z">
+<meta property="og:updated_time" content="2019-04-30T16:36:34.781Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="1.12.2的NPC抛射物">
 <meta name="twitter:description" content="警告本教程可能含有个人理解这会导致错误的引导请三思而后行 众所周知CNPC的NPC是可以发射抛射物的那他抛射物究竟是是什么呢？ noppes.npcs.entity.EntityProjectileEntityProjectile类位于noppes.npcs.entity包下它是noppes为NPCmod实现的一个抛射物实体。我们今天主要了解以下内容:  创建并召唤EntityProjectile">
@@ -218,11 +218,7 @@
 <p><strong>那么,为什么要把EntityProjectile转成EntityProjectileWrapper呢?</strong><br>因为EntityProjectileWrapper继承了EntityWrapper<br>这意味着什么？这意味你可以使用IEntity的全部方法,简单的进行操作。<br><em>希望你不用问我 转成EntityProjectileWrapper怎么用EntityProjectile的方法。<br>当然是使用getMCEntity()啊！</em></p>
 <p>好的 我们现在把它转型成EntityProjectileWrapper<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> EntityProjectileWrapper=Java.type(<span class="string">"noppes.npcs.api.wrapper.EntityProjectileWrapper"</span>);<span class="comment">//你也可以放在前面与EntityProjectile一起声明并赋值。</span></span><br><span class="line">projectile=<span class="keyword">new</span> EntityProjectileWrapper(projectile);</span><br></pre></td></tr></table></figure></p>
 <p>刚刚转型成EntityProjectileWrapper现在就会显现出来了<br>我们可以这样子召唤抛射物并设置位置<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//注意 本代码会出错 请继续往下看</span></span><br><span class="line">&lt;npc&gt;.getWorld().spawnEntity(projectile);</span><br><span class="line">projectile.setPosition(&lt;npc&gt;.x,&lt;npc&gt;.y+2,&lt;npc&gt;.z);</span><br></pre></td></tr></table></figure></p>
-<p>这样子我们就把他召唤在NPC头上了<br>当然 这是会出错的<br>你们知道为什么吗？<br>因为我们没有trownItem<br>也就是要发射的物品<br>因此我们发还要设置发射物品<br>然后为了其他需求 还需要设置很多。<br>所以<br>我个人推荐 使用EntityProjectileWrapper的另一个构建方法进行构建</p>
-<pre><code class="java"><span class="function"><span class="keyword">public</span> <span class="title">EntityProjectile</span><span class="params">(<span class="keyword">final</span> World world, <span class="keyword">final</span> EntityLivingBase thrower, <span class="keyword">final</span> ItemStack item, <span class="keyword">final</span> <span class="keyword">boolean</span> isNPC)</span> </span>{
-...
-}
-</code></pre>
+<p>这样子我们就把他召唤在NPC头上了<br>当然 这是会出错的<br>你们知道为什么吗？<br>因为我们没有trownItem<br>也就是要发射的物品<br>因此我们发还要设置发射物品<br>然后为了其他需求 还需要设置很多。<br>所以<br>我个人推荐 使用EntityProjectileWrapper的另一个构建方法进行构建<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">EntityProjectile</span><span class="params">(<span class="keyword">final</span> World world, <span class="keyword">final</span> EntityLivingBase thrower, <span class="keyword">final</span> ItemStack item, <span class="keyword">final</span> <span class="keyword">boolean</span> isNPC)</span> </span>&#123;</span><br><span class="line">...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <blockquote>
 <p>final World world 存在于那个世界<br>final EntityLivingBase thrower 发射者<br>final ItemStack item 发射物品<br>final boolean isNPC 是不是NPC发射的</p>
 </blockquote>
