@@ -13,7 +13,6 @@ var lock=true;
 var TipTimer=150;
 var Tiplv=true;
 var isInLive2d=false;
-$('#live2dcanvas')[0].style.opacity="0";
 onloadManager.addFunction(function() {
 	$('#live2dcanvas')[0].style.opacity="0.5";
 	$('#live2dcanvas')[0].style.marginTop="130px";

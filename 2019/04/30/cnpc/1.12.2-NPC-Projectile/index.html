@@ -204,88 +204,32 @@
 <li>创建并召唤EntityProjectile</li>
 <li>修改EntityProjectile对象的属性</li>
 </ul>
-<h4 id="创建一个EntityProjectile对象"><a href="#创建一个EntityProjectile对象" class="headerlink" title="创建一个EntityProjectile对象"></a>创建一个EntityProjectile对象</h4><p>首先我们看EntityProjectile的构建方法</p>
-<pre><code class="java">public EntityProjectile(final World world) {
-...
-}
-</code></pre>
+<h4 id="创建一个EntityProjectile对象"><a href="#创建一个EntityProjectile对象" class="headerlink" title="创建一个EntityProjectile对象"></a>创建一个EntityProjectile对象</h4><p>首先我们看EntityProjectile的构建方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">EntityProjectile</span><span class="params">(<span class="keyword">final</span> World world)</span> </span>&#123;</span><br><span class="line">...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>从中我们可以看出</p>
 <blockquote>
 <p>实例化一个<br>EntityProjectile对象需要<br>一个World类型的参数world</p>
 </blockquote>
 <p>那这个world表示什么呢？<br>表示这个实体存在于那个世界。<br>那么这个World类型具体是那个World呢<br>是net.minecraft.world.World<br>那么我们如何在脚本中获取我们想要的World呢？</p>
 <p>我们看NPCAPI的IWorld接口<br>它里面有一个getMCWorld()的方法<br>返回值类型是net.minecraft.world.World<br>他就是帮助我们获取我们想要的World的方法</p>
-<p>举个例子<br>获取当前NPC的所在世界</p>
-<pre><code class="js">var MCWorld=%npc%.getWorld().getMCWorld();
-//test
-</code></pre>
-<p>好 现在获取了一个World对象了<br>那么我们接着当然是要实例化EntityProjectile啊<br>我们需要先导入EntityProjectile类</p>
-<pre><code class="js">var EntityProjectile=Java.type(&quot;noppes.npcs.entity.EntityProjectile&quot;);
-</code></pre>
-<p>然后实例化EntityProjectile</p>
-<pre><code class="js">var projectile=new EntityProjectile(MCWorld);
-</code></pre>
+<p>举个例子<br>获取当前NPC的所在世界<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> MCWorld=%npc%.getWorld().getMCWorld();</span><br><span class="line"><span class="comment">//test</span></span><br></pre></td></tr></table></figure></p>
+<p>好 现在获取了一个World对象了<br>那么我们接着当然是要实例化EntityProjectile啊<br>我们需要先导入EntityProjectile类<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> EntityProjectile=Java.type(<span class="string">"noppes.npcs.entity.EntityProjectile"</span>);</span><br></pre></td></tr></table></figure></p>
+<p>然后实例化EntityProjectile<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> projectile=<span class="keyword">new</span> EntityProjectile(MCWorld);</span><br></pre></td></tr></table></figure></p>
 <p>然后我更推荐大家把他转型成EntityProjectileWrapper。<br>在转型前。<br>我们先了解<strong>EntityProjectile EntityProjectileWrapper IEntityProjectile</strong>的关系<br>首先 IEntityProjectile 是一个noppes为我们提供的接口<br>而EntityProjectileWrapper是实现了IEntityProjectile的一个Wrapper(封装器)<br>那Wrapper是什么呢。<br>比较浅显的，可以理解为 他把所有方法 属性 都翻译成”人话”，让你可以<strong>很容易看懂</strong>。<br><img src="https://upload.cc/i1/2019/04/30/NlQaUi.png" alt><br>总的来说 EntityProjectileWrapper和IEntityProjectile的用途就是 传递数据 简化操作 隔离底层<br>也就是说 他们是为了让你的操作更简单而存在的<br><del>这个还是只能意会难以言传啊 想深入了解的还是自己百度吧 其实就是一种设计模式noppes的代码确实有点迷)</del></p>
 <p><strong>那么,为什么要把EntityProjectile转成EntityProjectileWrapper呢?</strong><br>因为EntityProjectileWrapper继承了EntityWrapper<br>这意味着什么？这意味你可以使用IEntity的全部方法,简单的进行操作。<br><em>希望你不用问我 转成EntityProjectileWrapper怎么用EntityProjectile的方法。<br>当然是使用getMCEntity()啊！</em></p>
-<p>好的 我们现在把它转型成EntityProjectileWrapper</p>
-<pre><code class="js">var EntityProjectileWrapper=Java.type(&quot;noppes.npcs.api.wrapper.EntityProjectileWrapper&quot;);//你也可以放在前面与EntityProjectile一起声明并赋值。
-projectile=new EntityProjectileWrapper(projectile);
-</code></pre>
-<p>刚刚转型成EntityProjectileWrapper现在就会显现出来了<br>我们可以这样子召唤抛射物并设置位置</p>
-<pre><code class="js">//注意 本代码会出错 请继续往下看
-%npc%.getWorld().spawnEntity(projectile);
-projectile.setPosition(%npc%.x,%npc%.y+2,%npc%.z);
-</code></pre>
-<p>这样子我们就把他召唤在NPC头上了<br>当然 这是会出错的<br>你们知道为什么吗？<br>因为我们没有trownItem<br>也就是要发射的物品<br>因此我们发还要设置发射物品<br>然后为了其他需求 还需要设置很多。<br>所以<br>我个人推荐 使用EntityProjectileWrapper的另一个构建方法进行构建</p>
-<pre><code class="java">public EntityProjectile(final World world, final EntityLivingBase thrower, final ItemStack item, final boolean isNPC) {
-...
-}
-</code></pre>
+<p>好的 我们现在把它转型成EntityProjectileWrapper<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> EntityProjectileWrapper=Java.type(<span class="string">"noppes.npcs.api.wrapper.EntityProjectileWrapper"</span>);<span class="comment">//你也可以放在前面与EntityProjectile一起声明并赋值。</span></span><br><span class="line">projectile=<span class="keyword">new</span> EntityProjectileWrapper(projectile);</span><br></pre></td></tr></table></figure></p>
+<p>刚刚转型成EntityProjectileWrapper现在就会显现出来了<br>我们可以这样子召唤抛射物并设置位置<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//注意 本代码会出错 请继续往下看</span></span><br><span class="line">%npc%.getWorld().spawnEntity(projectile);</span><br><span class="line">projectile.setPosition(%npc%.x,%npc%.y+<span class="number">2</span>,%npc%.z);</span><br></pre></td></tr></table></figure></p>
+<p>这样子我们就把他召唤在NPC头上了<br>当然 这是会出错的<br>你们知道为什么吗？<br>因为我们没有trownItem<br>也就是要发射的物品<br>因此我们发还要设置发射物品<br>然后为了其他需求 还需要设置很多。<br>所以<br>我个人推荐 使用EntityProjectileWrapper的另一个构建方法进行构建<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">EntityProjectile</span><span class="params">(<span class="keyword">final</span> World world, <span class="keyword">final</span> EntityLivingBase thrower, <span class="keyword">final</span> ItemStack item, <span class="keyword">final</span> <span class="keyword">boolean</span> isNPC)</span> </span>&#123;</span><br><span class="line">...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <blockquote>
 <p>final World world 存在于那个世界<br>final EntityLivingBase thrower 发射者<br>final ItemStack item 发射物品<br>final boolean isNPC 是不是NPC发射的</p>
 </blockquote>
-<p>那么我们一个完整的生成应该是这样的</p>
-<pre><code class="js">EntityProjectile=Java.type(&quot;noppes.npcs.entity.EntityProjectile&quot;);
-EntityProjectileWrapper=Java.type(&quot;noppes.npcs.api.wrapper.EntityProjectileWrapper&quot;);
-var MCWorld=%npc%.getWorld().getMCWorld();
-projectile=new EntityProjectile(MCWorld,%entity%.getMCEntity(),%item%.getMCItemStack(),true);
-projectile=new EntityProjectileWrapper(projectile);
-%npc%.getWorld().spawnEntity(projectile);
-projectile.setPosition(%npc%.x,%npc%.y+2,%npc%.z);
-//test
-</code></pre>
+<p>那么我们一个完整的生成应该是这样的<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">EntityProjectile=Java.type(<span class="string">"noppes.npcs.entity.EntityProjectile"</span>);</span><br><span class="line">EntityProjectileWrapper=Java.type(<span class="string">"noppes.npcs.api.wrapper.EntityProjectileWrapper"</span>);</span><br><span class="line"><span class="keyword">var</span> MCWorld=%npc%.getWorld().getMCWorld();</span><br><span class="line">projectile=<span class="keyword">new</span> EntityProjectile(MCWorld,%entity%.getMCEntity(),%item%.getMCItemStack(),<span class="literal">true</span>);</span><br><span class="line">projectile=<span class="keyword">new</span> EntityProjectileWrapper(projectile);</span><br><span class="line">%npc%.getWorld().spawnEntity(projectile);</span><br><span class="line">projectile.setPosition(%npc%.x,%npc%.y+<span class="number">2</span>,%npc%.z);</span><br><span class="line"><span class="comment">//test</span></span><br></pre></td></tr></table></figure></p>
 <p>现在我们把他召唤出来了<br>那要怎么射出去呢？<br>答案是使用向量。</p>
-<p>我们可以通过yaw和pitch来计算向量<br>minecraft是这样子写的(最好自己写一个吧XD)</p>
-<pre><code class="java">float f = -Math.sin(yaw * 0.01745329) * Math.cos(pitch * 0.01745329);
-float f1 = -Math.sin(pitch * 0.01745329);
-float f2 = Math.cos(yaw * 0.01745329) * Math.cos(pitch * 0.01745329);
-</code></pre>
+<p>我们可以通过yaw和pitch来计算向量<br>minecraft是这样子写的(最好自己写一个吧XD)<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">float</span> f = -Math.sin(yaw * <span class="number">0.01745329</span>) * Math.cos(pitch * <span class="number">0.01745329</span>);</span><br><span class="line"><span class="keyword">float</span> f1 = -Math.sin(pitch * <span class="number">0.01745329</span>);</span><br><span class="line"><span class="keyword">float</span> f2 = Math.cos(yaw * <span class="number">0.01745329</span>) * Math.cos(pitch * <span class="number">0.01745329</span>);</span><br></pre></td></tr></table></figure></p>
 <p>f f1 f2 分别是 x y z 的速度。<br>然后我们可以根据自己的需要<br>来扩大速度 速度越快 有效距离就越远</p>
-<p>我们可以这样子写</p>
-<pre><code class="js">var f = -Math.sin(yaw * 0.01745329) * Math.cos(pitch * 0.01745329);
-var f1 = -Math.sin(pitch * 0.01745329);
-var f2 = Math.cos(yaw * 0.01745329) * Math.cos(pitch * 0.01745329);
-f*=&lt;speed&gt;；
-f1*=&lt;speed&gt;；
-f2*=&lt;speed&gt;；
-</code></pre>
+<p>我们可以这样子写<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> f = -<span class="built_in">Math</span>.sin(yaw * <span class="number">0.01745329</span>) * <span class="built_in">Math</span>.cos(pitch * <span class="number">0.01745329</span>);</span><br><span class="line"><span class="keyword">var</span> f1 = -<span class="built_in">Math</span>.sin(pitch * <span class="number">0.01745329</span>);</span><br><span class="line"><span class="keyword">var</span> f2 = <span class="built_in">Math</span>.cos(yaw * <span class="number">0.01745329</span>) * <span class="built_in">Math</span>.cos(pitch * <span class="number">0.01745329</span>);</span><br><span class="line">f*=&lt;speed&gt;；</span><br><span class="line">f1*=&lt;speed&gt;；</span><br><span class="line">f2*=&lt;speed&gt;；</span><br></pre></td></tr></table></figure></p>
 <p>这样子我们就把抛射物发射了出去</p>
-<p>最后我们再来简单的设置抛射物的几个属性</p>
-<pre><code class="js">projectile.getMCEntity().damage=10;//设置伤害为10
-projectile.getMCEntity().setHasGravity(true);//设为受重力影响
-projectile.getMCEntity().setIs3D(true);//设为3D
-projectile.getMCEntity().setRotating(true);//设为旋转
-projectile.getMCEntity().setStickInWall(true);//设为可以插在墙上
-</code></pre>
-<p>再教大家一个设置大小好了XD 其他的就自己研究吧</p>
-<pre><code class="js">dataManager=projectile.getMCEntity().getClass().getSuperclass().getSuperclass().getDeclaredField(&quot;field_70180_af&quot;);
-dataManager.setAccessible(true);
-dataManager=dataManager.get(projectile.getMCEntity());
-Size=projectile.getMCEntity().getClass().getDeclaredField(&quot;Size&quot;);
-Size.setAccessible(true);
-Size=Size.get(projectile.getMCEntity());
-dataManager.func_187227_b(Size,Integer.valueOf(&lt;Size&gt;));
-</code></pre>
+<p>最后我们再来简单的设置抛射物的几个属性<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">projectile.getMCEntity().damage=<span class="number">10</span>;<span class="comment">//设置伤害为10</span></span><br><span class="line">projectile.getMCEntity().setHasGravity(<span class="literal">true</span>);<span class="comment">//设为受重力影响</span></span><br><span class="line">projectile.getMCEntity().setIs3D(<span class="literal">true</span>);<span class="comment">//设为3D</span></span><br><span class="line">projectile.getMCEntity().setRotating(<span class="literal">true</span>);<span class="comment">//设为旋转</span></span><br><span class="line">projectile.getMCEntity().setStickInWall(<span class="literal">true</span>);<span class="comment">//设为可以插在墙上</span></span><br></pre></td></tr></table></figure></p>
+<p>再教大家一个设置大小好了XD 其他的就自己研究吧<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">dataManager=projectile.getMCEntity().getClass().getSuperclass().getSuperclass().getDeclaredField(<span class="string">"field_70180_af"</span>);</span><br><span class="line">dataManager.setAccessible(<span class="literal">true</span>);</span><br><span class="line">dataManager=dataManager.get(projectile.getMCEntity());</span><br><span class="line">Size=projectile.getMCEntity().getClass().getDeclaredField(<span class="string">"Size"</span>);</span><br><span class="line">Size.setAccessible(<span class="literal">true</span>);</span><br><span class="line">Size=Size.get(projectile.getMCEntity());</span><br><span class="line">dataManager.func_187227_b(Size,Integer.valueOf(&lt;Size&gt;));</span><br></pre></td></tr></table></figure></p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
       
 
