@@ -140,7 +140,7 @@ function turing_submit() {
   xhr.send(null);
   if ( (xhr.status >= 200 && xhr.status < 300) || xhr.status == 304 ){
   message=eval("(" + xhr.responseText + ")").text;
-  message=message.replace(/"MyName"/g,"灰灰").replace(/"图灵工程师爸爸"/g,"码农灰").replace(/"图灵工程师爸爸"/g,"女装的码农灰");
+  message=message.replace(/MyName/g,"灰灰").replace(/图灵工程师爸爸/g,"码农灰").replace(/图灵工程师爸爸/ig,"女装的码农灰");
   var last="";
   switch(message[message.length-1]){
   case "。":
