@@ -13,6 +13,7 @@ var lock=true;
 var TipTimer=150;
 var Tiplv=true;
 var isInLive2d=false;
+var ip=returnCitySN["cip"];
 onloadManager.addFunction(function() {
 	$('#live2dcanvas')[0].style.opacity="0.5";
 	$('#live2dcanvas')[0].style.marginTop="130px";
@@ -134,7 +135,7 @@ function talk(str){
 }
 var xhr = new XMLHttpRequest;
 function turing_submit() {
-  var url = "//www.tuling123.com/openapi/api?key=e1230e4385c8a5efdb7ae21a293f9f0c&info=" + document.getElementById("turing_input_box").value;
+  var url = "//www.tuling123.com/openapi/api?key=e1230e4385c8a5efdb7ae21a293f9f0c&info=" + document.getElementById("turing_input_box").value + "&userid="+ip;
   xhr.open("get",url,false);
   xhr.send(null);
   if ( (xhr.status >= 200 && xhr.status < 300) || xhr.status == 304 ){
