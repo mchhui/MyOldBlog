@@ -1,4 +1,4 @@
-messages=[
+myMessages=[
 "苟利国家生死以 岂因祸福避趋之",
 "不想当将军的士兵不是好士兵",
 "观棋者不语",
@@ -37,7 +37,7 @@ messages=[
 $("#header").ready(function(){
     var header=$("#header")[0];
     var headerSubtitle;
-    message=messages[Math.floor(Math.random()*messages.length)];
+    var message=myMessages[Math.floor(Math.random()*myMessages.length)];
     for(var x in p_elements=header.getElementsByTagName("p")){
         if(p_elements[x].className=="header-subtitle"){
             headerSubtitle=p_elements[x];
