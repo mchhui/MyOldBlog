@@ -1,6 +1,6 @@
 onloadManager.addFunction(function(){
     if(document.cookie=="isWelcomed=true"){
-        //return;
+        return;
     }
     welcome();
     document.cookie="isWelcomed=true";
