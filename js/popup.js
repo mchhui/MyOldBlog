@@ -20,6 +20,8 @@ document.body.appendChild(popupText);
 
 popupText.disabled=true;
 popupText.append(text);
+popupText.z-index=999
+popupText.bottom: 60%;
 popupText.style.display="block";
 popupText.style.fontSize='30px';
 popupText.style.fontFamily='Microsoft JhengHei';
@@ -27,14 +29,16 @@ popupText.style.color="black";
 popupBG.src='/mchhui/assets/img/popup_bg.png';
 popupBG.width=''+(60+parseInt(((text.length-getLength(text)/2)*30)));
 popupBG.height=''+height;
+popupBG.z-index=998
+popupBG.bottom: 60%;
 
-popupBG.style.position='absolute';
+popupBG.style.position='fixed';
 popupBG.style.left='50%';
 popupBG.style.top='25%';
 popupBG.style.marginTop='-'+parseInt(Number(popupBG.height))+'px';
 popupBG.style.marginLeft='-'+parseInt(Number(popupBG.width)/2)+'px';
 
-popupText.style.position='absolute';
+popupText.style.position='fixed';
 popupText.style.left='50%';
 popupText.style.top='2'+(5+textHeightMove)+'%';
 popupText.style.marginTop='-'+parseInt(Number(popupBG.height))+'px';
