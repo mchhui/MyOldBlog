@@ -5,6 +5,7 @@ onloadManager.addFunction(function(){
         document.cookie="welcomeTime="+new Date().getTime();
         return
     }
+    alert(document.cookie.split("=")[1]);
     if(new Date().getTime()-parseInt(document.cookie.split("=")[1])>300000){
     welcome();
     }
