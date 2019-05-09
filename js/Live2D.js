@@ -21,13 +21,27 @@ onloadManager.addFunction(function() {
 	$("body").append('<div id="l2dTipBar" style="position: fixed; right: 10px; bottom: 160px; width: 200px;  z-index: 100000; opacity: 1; background: rgb(245,245,245); border: 2px solid #777; border-radius: 20px;opacity:0;text-align:center;padding:10px 5px 10px 5px;pointer-events:none;"><font id="l2dTip" color="#222" size="2"></font></div>');
     $("body").append("<div id='chatBar' style='position: fixed; right: 170px;bottom: 20px;opacity: 0;'><div style='width:150px;height:19px;background: rgb(245,245,245); border: 2px solid #777;'><input id='turing_input_box' type='text' placeholder='我想说...' style='vertical-align: top;font-family:SimSun;font-size:10px;width:130px;height:17px;border:0px;background:none;margin-left:10px;outline:none;'/></div><button id='send_button' onclick='turing_submit();clearChat();' background: style='width:75px;height:19px;background:rgb(60,179,113); border: 1px solid #777; border-radius: 5px;font-size:10px;'>发射</button><button id='clear_button' onclick='clearChat()' background: style='width:75px;height:19px;background:rgb(0,191,255); border: 1px solid #777; border-radius: 5px;margin-left:4px;font-size:10px;'>清空</button></div>")
    setInterval(checkTip,20);
-    setTimeout(function(){msgTip("鸭鸭,又见面了！<br>双击空白处也可以唤出我哦<br>更新计划:<br>1.回复栏");},200);
+    setTimeout(function(){
+        var dateObj=new Date();
+        if(dateObj.getMonth()+1==5&&dateObj.getFullYear()==2019){
+        var message="<br>"
+        var date=dateObj.getDate()-17;
+            if(date<0){
+                message+="距离Minecraft十周年还有"+Math.abs(date)+"天！";
+            }else if(date>0){
+                message+="距离Minecraft十周年已过去"+date+"天！";
+            }else{
+                message+="今天,Minecraft十周年哦哦哦哦哦哦哦哦哦！";
+            }
+        }
+        talk("鸭鸭,又见面了！<br>双击空白处也可以唤出我哦<br>更新计划:<br>1.回复栏"+message);
+        },200);
     touch.on($("body"),"doubletap",function(e){                
 		if(isShow){
-			msgTip("好吧好吧qwq 不烦你了XD");
+			talk("好吧好吧qwq 不烦你了XD");
 			hide();
 		}else{
-			msgTip("我来咯！");
+			talk("我来咯！");
 			show();
 			isInLive2d=true;
 		}
@@ -77,12 +91,11 @@ document.onclick=function(ev){                
 	var x=oEvent.clientX;
 	var y=oEvent.clientY;
 	//popup(document.body.clientHeight-y,-1);
-
 		if(isShow&&document.body.clientWidth-x>50&&document.body.clientWidth-x<150&&document.body.clientHeight-y<160){
-			msgTip("好吧好吧qwq 不烦你了XD");
+			talk("好吧好吧qwq 不烦你了XD");
 			hide();
 		}else if(document.body.clientWidth-x>50&&document.body.clientWidth-x<150&&document.body.clientHeight-y<90){
-			msgTip("我来咯！");
+			talk("我来咯！");
 			show();
 			isInLive2d=true;
 		}
@@ -101,7 +114,7 @@ $(document).mousemove(function(ev){
 				return;	
 				}
 			isInLive2d=true;
-			msgTip(messages[Math.floor(Math.random()*messages.length)]);
+			talk(messages[Math.floor(Math.random()*messages.length)]);
 			}else{
 			isInLive2d=false;
 			}
@@ -131,7 +144,7 @@ function msgTip(msg){
 	$("#l2dTip")[0].innerHTML=msg;
 }
 function talk(str){
-	msgTip((str==null)?messages[Math.floor(Math.random()*messages.length)]:str);
+	msgTip(((str==null)?messages[Math.floor(Math.random()*messages.length)]:str));
 }
 var xhr = new XMLHttpRequest;
 function turing_submit() {
@@ -139,7 +152,7 @@ function turing_submit() {
   xhr.open("get",url,false);
   xhr.send(null);
   if ( (xhr.status >= 200 && xhr.status < 300) || xhr.status == 304 ){
-  message=eval("(" + xhr.responseText + ")").text;
+  var message=eval("(" + xhr.responseText + ")").text;
   message=message.replace(/MyName/g,"灰灰").replace(/图灵工程师爸爸/g,"码农灰").replace(/图灵工程师爸爸/ig,"女装的码农灰");
   var last="";
   switch(message[message.length-1]){
