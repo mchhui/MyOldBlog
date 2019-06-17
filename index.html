@@ -47,7 +47,7 @@
 <div class="intrude-less">
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
-			<img src="https://upload.cc/i1/2019/04/22/7ZNIDn.jpg" class="js-avatar">
+			<img src="https://upload.cc/i1/2019/06/16/ByVc1J.png" class="js-avatar">
 		</a>
 		<hgroup>
 		  <h1 class="header-author"><a href="/">Hueihuea</a></h1>
@@ -113,7 +113,7 @@
 	<div class="intrude-less">
 		<header id="header" class="inner">
 			<div class="profilepic">
-				<img src="https://upload.cc/i1/2019/04/22/7ZNIDn.jpg" class="js-avatar">
+				<img src="https://upload.cc/i1/2019/06/16/ByVc1J.png" class="js-avatar">
 			</div>
 			<hgroup>
 			  <h1 class="header-author js-header-author">Hueihuea</h1>
@@ -171,6 +171,86 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-bukkit/ForgeInBukkitPlugin" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/17/bukkit/ForgeInBukkitPlugin/">在Bukkit插件上调用ForgeAPI及ForgeMod</a>
+    </h1>
+  
+
+        
+        <a href="/2019/06/17/bukkit/ForgeInBukkitPlugin/" class="archive-article-date">
+  	<time datetime="2019-06-16T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="警告"><a href="#警告" class="headerlink" title="警告"></a>警告</h2><p>本文可能含有<br>个人理解<br>这会导致错误的引导<br>请三思而后行</p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>本文应该是简短到不行的<br>在Bukkit插件上调用Forge<br>这肯定是只有在Bukkit+Forge的服务端下才能实现<br>在知道怎么调用前<br>我们先了解下Bukkit+Forge的实现<br>说简单点 因为我也不是很懂 没法和你说复杂<br>Bukkit+Forge就是把Bukkit当成mod打到了Forge上<br>那mod肯定在Forge的类加载器下<br>而Bukkit插件又在Bukkit的类加载器下<br>所以我们这样子写 就可以获得 Forge的类加载器 也就是Minecraft与ForgeMod所在的加载器<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Bukkit.getPluginManager().getPlugin(%pluginID%).getClass().getClassLoader().getClass().getClassLoader();</span><br></pre></td></tr></table></figure></p>
+<p>就是如此简短 再见。</p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Bukkit</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Forge</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/06/17/bukkit/ForgeInBukkitPlugin/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-forge/saoui2020/SAOUI2020 First Show" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -575,6 +655,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">MOD</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Bukkit</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Forge</a>
               </li>
             
             <div class="clearfix"></div>
