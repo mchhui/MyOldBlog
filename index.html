@@ -172,6 +172,221 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-cnpc/RegisterCommand/CommandRegistrar" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        /**
+*@Author Hueihuea
+*/
+function Command(name,usage){
+ this.MCCommand;
+ this.getCommandName=function(){
+  /*String getCommandName()
+  *应返回指令的名字
+  *如:/noppes 则返回noppes
+  */
+ };
+ this.getCommandAliases=function(){
+  /*List getCommandAliases()
+  *应返回一个List 它包含指令的简写
+  */
+ }
+ this.getCommandUsage=function(sender){
+  /*String getCommandUsage(ICommandSender sender)
+  *应返回指令的用法
+  *当玩家输入"/help 你的指令名" 的时候就会出现
+  *sender:指令发送者 可能是玩家 控制台 命令方块 或者其他什么
+  */
+ };
+ this.processCommand=function(sender,args){
+  /*void processCommand(ICommandSender sender, String[] args)
+  *在玩家使用该指令时会调用本函数
+  *sender:指令发送者 可能是玩家 控制台 命令方块 或者其他什么
+  *args:指令的参数
+  */
+ };
+ this.addTabCompletionOptions=function(sender,args){
+  return null;
+  /*List addTabCompletionOptions(ICommandSender sender, String[] args)
+  *用于tab自动补全
+  *应返回补全后的参数
+  *sender:指令发送者 可能是玩家 控制台 命令方块 或者其他什么
+  *args:指令的参数
+  */
+ };
+ this.getRequiredPermissionLevel=function(){
+  return 4;
+  /*int getRequiredPermissionLevel
+  *指令所需的权限 0表示所有人可用 4表示OP可用
+  *应返回权限等级
+  */
+ }
+ this.canCommandSenderUseCommand=function(sender){
+  return Java.super(this.getMCCommand()).func_71519_b(sender);
+  /*boolean canCommandSenderUseCommand
+  *-sender:指令发送者
+  *应返回发送者是否拥有使用本指令的权限
+  */
+ }
+ //上方函数以1.7.10的方法为准
+ //1.12.2修改函数时补全参数后通用。
+ this.getMCCommand=function(){
+  if(this.MCCommand!=null){
+  return this.MCCommand;
+  }
+  var CommandBase=Java.type("net.minecraft.command.CommandBase");
+  var MCCommand=Java.extend(CommandBase,{
+   func_71517_b:this.getCommandName,
+   func_71514_a:this.getCommandAliases,
+   func_71518_a:this.getCommandUsage,
+   func_71515_b:this.processCommand,
+   func_71516_a:this.addTabCompletionOptions,
+   func_82362_a:this.getRequiredPermissionLevel,
+   func_71519_b:this.canCommandSenderUseCommand,
+   /*下方是对1.12.2的兼容*/
+   func_184881_a:this.processCommand,
+   func_184883_a:this.addTabCompletionOptions,
+   func_184882_a:this.canCommandSenderUseCommand
+  });
+  this.MCCommand=new MCCommand();
+  return this.MCCommand;
+ }
+}
+function registerCommand(command){
+ var MinecraftServer=Java.type("net.minecraft.server.MinecraftServer");
+ var server=MinecraftServer.func_71276_C();
+     if(!(command instanceof Command)){
+     return;
+    }
+    server.func_71187_D().func_71560_a(command.getMCCommand())
+}<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/23/cnpc/RegisterCommand/CommandRegistrar/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-cnpc/RegisterCommand" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/23/cnpc/RegisterCommand/">CNPC脚本·注册指令 教程</a>
+    </h1>
+  
+
+        
+        <a href="/2019/07/23/cnpc/RegisterCommand/" class="archive-article-date">
+  	<time datetime="2019-07-22T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="警告"><a href="#警告" class="headerlink" title="警告"></a>警告</h2><p>本教程可能含有<br>个人理解<br>这会导致错误的引导<br>请三思而后行</p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>今天我们来说说注册指令吧。<br>轮子已经造好:<br><a href="http://ys-f.ys168.com/605835255/mnenmlq2T6M555H7IMO5/CommandRegistrar.js" target="_blank" rel="noopener">[点我下载CommandRegistrar]</a><br>CommandRegistrar为我们提供了一个Command对象函数和一个registerCommand方法函数<br>它让我们注册指令更加方便。<br>那我们今天就来做一个suicide(自杀)指令吧<br>想要用CommandRegistrar注册一个指令<br>我们就需要有一个Command对象<br>我们可以这样子构建它<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> commandSuicide=<span class="keyword">new</span> Command();</span><br></pre></td></tr></table></figure></p>
+<p>Command对象有一个方法getCommandName()<br>我们应该去改写他 让它返回我们指令的名字<br>像这样<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">commandSuicide.getCommandName=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"> <span class="keyword">return</span> <span class="string">"suicide"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这样子 我们指令的名字就是suicide了<br>我们就可以通过/suicide来使用这个指令</p>
+<p>Command对象有一个方法getCommandUsage(sender)<br>我们应该去改写他 让它返回我们指令的使用说明<br>像这样<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">commandSuicide.getCommandUsage=<span class="function"><span class="keyword">function</span>(<span class="params">sender</span>)</span>&#123;</span><br><span class="line"> <span class="keyword">return</span> <span class="string">"/suicide use to suicide"</span>;</span><br><span class="line"> <span class="comment">//一般来说要国际化的 但是脚本不方便嘛</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Command对象有一个方法getCommandUsage()<br>我们应该去改写他 让它返回我们指令的权限等级<br>像这样<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">commandSuicide.getRequiredPermissionLevel=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"> <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"> <span class="comment">//指令所需的权限 0表示所有人可用 4表示OP可用(默认情况下)</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>而Command对象的processCommand(ICommandSender sender, String[] args)方法会在该使用被使用时调用<br>我们用他来实现指令的功能<br>像这样<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">commandSuicide.processCommand=<span class="function"><span class="keyword">function</span>(<span class="params">sender,args</span>)</span>&#123;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">CNPC</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">教程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/23/cnpc/RegisterCommand/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-bukkit/ForgeInBukkitPlugin" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -542,7 +757,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2019 Hueihuea
+    		&copy; 2020 Hueihuea
     	</div>
       	<div class="footer-right">
 			<a onclick="window.location.href=('https://github.com/mchhui/mchhui.github.io');">Goto github.</a>
@@ -626,7 +841,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">日常</a>
+                <a href="javascript:void(0)" class="js-tag color2">Bukkit</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Forge</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -642,11 +861,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">小说</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">伐鬼人Shorcist</a>
+                <a href="javascript:void(0)" class="js-tag color3">日常</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -655,14 +870,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">MOD</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Bukkit</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Forge</a>
               </li>
             
             <div class="clearfix"></div>

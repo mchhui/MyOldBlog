@@ -22,19 +22,7 @@ onloadManager.addFunction(function() {
     $("body").append("<div id='chatBar' style='position: fixed; right: 170px;bottom: 20px;opacity: 0;'><div style='width:150px;height:19px;background: rgb(245,245,245); border: 2px solid #777;'><input id='turing_input_box' type='text' placeholder='我想说...' style='vertical-align: top;font-family:SimSun;font-size:10px;width:130px;height:17px;border:0px;background:none;margin-left:10px;outline:none;'/></div><button id='send_button' onclick='turing_submit();clearChat();' background: style='width:75px;height:19px;background:rgb(60,179,113); border: 1px solid #777; border-radius: 5px;font-size:10px;'>发射</button><button id='clear_button' onclick='clearChat()' background: style='width:75px;height:19px;background:rgb(0,191,255); border: 1px solid #777; border-radius: 5px;margin-left:4px;font-size:10px;'>清空</button></div>")
    setInterval(checkTip,20);
     setTimeout(function(){
-        var dateObj=new Date();
-        if(dateObj.getMonth()+1==5&&dateObj.getFullYear()==2019){
-        var message="<br>"
-        var date=dateObj.getDate()-17;
-            if(date<0){
-                message+="距离Minecraft十周年还有"+Math.abs(date)+"天！";
-            }else if(date>0){
-                message+="距离Minecraft十周年已过去"+date+"天！";
-            }else{
-                message+="今天,Minecraft十周年哦哦哦哦哦哦哦哦哦！";
-            }
-        }
-        talk("鸭鸭,又见面了！<br>双击空白处也可以唤出我哦<br>更新计划:<br>1.回复栏"+message);
+        talk("鸭鸭,又见面了！<br>双击空白处也可以唤出我哦<br>更新计划:<br>1.回复栏");
         },200);
     touch.on($("body"),"doubletap",function(e){                
 		if(isShow){
