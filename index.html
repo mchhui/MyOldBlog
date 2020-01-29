@@ -172,111 +172,31 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="false-cnpc/RegisterCommand/CommandRegistrar" class="article article-type-false  article-index" itemscope itemprop="blogPost">
+    <article id="post-forge/202001292349" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/23/cnpc/RegisterCommand/CommandRegistrar/">CommandRegistrar.js</a>
+      <a class="article-title" href="/2020/01/29/forge/202001292349/">关于Maven中央插件库关闭对http协议的支持导致 Forge开发环境构建失败一事</a>
     </h1>
   
 
         
-        <a href="/2019/07/23/cnpc/RegisterCommand/CommandRegistrar/" class="archive-article-date">
-  	<time datetime="2019-07-23T06:08:20.187Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-23</time>
+        <a href="/2020/01/29/forge/202001292349/" class="archive-article-date">
+  	<time datetime="2020-01-28T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-29</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        /**
-*@Author Hueihuea
-*/
-function Command(name,usage){
- this.MCCommand;
- this.getCommandName=function(){
-  /*String getCommandName()
-  *应返回指令的名字
-  *如:/noppes 则返回noppes
-  */
- };
- this.getCommandAliases=function(){
-  /*List getCommandAliases()
-  *应返回一个List 它包含指令的简写
-  */
- }
- this.getCommandUsage=function(sender){
-  /*String getCommandUsage(ICommandSender sender)
-  *应返回指令的用法
-  *当玩家输入"/help 你的指令名" 的时候就会出现
-  *sender:指令发送者 可能是玩家 控制台 命令方块 或者其他什么
-  */
- };
- this.processCommand=function(sender,args){
-  /*void processCommand(ICommandSender sender, String[] args)
-  *在玩家使用该指令时会调用本函数
-  *sender:指令发送者 可能是玩家 控制台 命令方块 或者其他什么
-  *args:指令的参数
-  */
- };
- this.addTabCompletionOptions=function(sender,args){
-  return null;
-  /*List addTabCompletionOptions(ICommandSender sender, String[] args)
-  *用于tab自动补全
-  *应返回补全后的参数
-  *sender:指令发送者 可能是玩家 控制台 命令方块 或者其他什么
-  *args:指令的参数
-  */
- };
- this.getRequiredPermissionLevel=function(){
-  return 4;
-  /*int getRequiredPermissionLevel
-  *指令所需的权限 0表示所有人可用 4表示OP可用
-  *应返回权限等级
-  */
- }
- this.canCommandSenderUseCommand=function(sender){
-  return Java.super(this.getMCCommand()).func_71519_b(sender);
-  /*boolean canCommandSenderUseCommand
-  *-sender:指令发送者
-  *应返回发送者是否拥有使用本指令的权限
-  */
- }
- //上方函数以1.7.10的方法为准
- //1.12.2修改函数时补全参数后通用。
- this.getMCCommand=function(){
-  if(this.MCCommand!=null){
-  return this.MCCommand;
-  }
-  var CommandBase=Java.type("net.minecraft.command.CommandBase");
-  var MCCommand=Java.extend(CommandBase,{
-   func_71517_b:this.getCommandName,
-   func_71514_a:this.getCommandAliases,
-   func_71518_a:this.getCommandUsage,
-   func_71515_b:this.processCommand,
-   func_71516_a:this.addTabCompletionOptions,
-   func_82362_a:this.getRequiredPermissionLevel,
-   func_71519_b:this.canCommandSenderUseCommand,
-   /*下方是对1.12.2的兼容*/
-   func_184881_a:this.processCommand,
-   func_184883_a:this.addTabCompletionOptions,
-   func_184882_a:this.canCommandSenderUseCommand
-  });
-  this.MCCommand=new MCCommand();
-  return this.MCCommand;
- }
-}
-function registerCommand(command){
- var MinecraftServer=Java.type("net.minecraft.server.MinecraftServer");
- var server=MinecraftServer.func_71276_C();
-     if(!(command instanceof Command)){
-     return;
-    }
-    server.func_71187_D().func_71560_a(command.getMCCommand())
-}<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+        <h2 id="警告"><a href="#警告" class="headerlink" title="警告"></a>警告</h2><p>本教程可能含有<br>个人理解<br>这会导致错误的引导<br>请三思而后行</p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>前不久 repo1.maven.org Maven中央插件库关闭了对http支持<br>而1.7.10MDK等MDK仍然使用的Gradle2.0使用http进行请求<br>导致 501错误<br>修正方法</p>
+<h3 id="一、使用代理"><a href="#一、使用代理" class="headerlink" title="一、使用代理"></a>一、使用代理</h3><p>通过代理将http请求转为https请求<br>这个可以另行百度</p>
+<h3 id="二、升级Gradle"><a href="#二、升级Gradle" class="headerlink" title="二、升级Gradle"></a>二、升级Gradle</h3><p>已知是Gradle过旧导致的问题<br>那么升级即可<br>推荐升级为2.14（也是想当老 不过管用）<br>方法如下<br>项目根目录下\gradle\wrapper中gradle-wrapper.properties中distributionUrl修改为https\://services.gradle.org/distributions/gradle-2.14-bin.zip</p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
       
 
       
@@ -284,11 +204,26 @@ function registerCommand(command){
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Forge</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">教程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/23/cnpc/RegisterCommand/CommandRegistrar/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/01/29/forge/202001292349/">展开全文 >></a>
         </p>
       
 
